@@ -28,23 +28,22 @@ vertices.forEach (vertex) ->
     .animate { r: outerRadius / 2 }, 250, "backOut", animations.next
 
 pairs.forEach (pair) ->
+  start = "M#{pair[0].x} #{pair[0].y}"
+  line = "L#{pair[1].x} #{pair[1].y}"
+
   animations.push ->
-    canvas.path([
-      "M", pair[0].x, pair[0].y
-      "L", pair[1].x, pair[1].y
-    ]).attr
+    canvas.path(start).attr
       stroke: "#fff"
       "stroke-width": 3
     .toBack()
+    .animate { path: "#{start} #{line}" }, 150, animations.next
 
-    canvas.path([
-      "M", pair[0].x, pair[0].y
-      "L", pair[1].x, pair[1].y
-    ]).attr
+  animations.push ->
+    canvas.path(start).attr
       stroke: "#000"
-      "stroke-width": 0
+      "stroke-width": 10
     .toBack()
-    .animate { "stroke-width": 10 }, 500, "backOut", animations.next
+    .animate { path: "#{start} #{line}" }, 150, animations.next
 
 animations.push ->
   set = canvas.setFinish()
