@@ -1,7 +1,6 @@
 {
-  "name": "sut",
+  "name": "sut-logo",
   "version": "0.0.1",
-  "main": "dist/main.js",
   "browserify": {
     "transform": [
       "coffeeify"
@@ -21,21 +20,18 @@
     "jade": "^1.3.1",
     "watchify": "^0.10.2"
   },
-  "files": [
-    "dist/"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mdiebolt/sut-logo.git"
+    "url": "https://github.com/ultramodern/logo.git"
   },
   "keywords": [
     "Raphael",
     "SVG"
   ],
-  "author": "mdiebolt",
+  "author": "Matt Diebolt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mdiebolt/sut-logo/issues"
+    "url": "https://github.com/ultramodern/logo/issues"
   },
-  "homepage": "https://github.com/mdiebolt/sut"
+  "homepage": "https://ultramodern.github.io/logo"
 }
