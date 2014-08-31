@@ -1,0 +1,5 @@
+#! /bin/bash
+
+watchify site/main.coffee -o site/build.js --debug --verbose &
+jade -w ./site &
+python -m SimpleHTTPServer

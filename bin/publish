@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# push the folder `site` to repo's gh-pages branch
+git subtree push --prefix site origin gh-pages

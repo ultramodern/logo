@@ -1,0 +1,3 @@
+#! /bin/bash
+
+browserify lib/logo.coffee --standalone sut -o dist/main.js
