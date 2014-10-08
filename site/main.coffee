@@ -14,7 +14,7 @@ outerPoints = 3
 canvas.setStart()
 
 outerRadius = 12
-vertices.forEach (vertex) ->
+vertices.reverse().forEach (vertex) ->
   animations.push ->
     canvas.circle(vertex.x, vertex.y, 0).attr
       stroke: "#000"
