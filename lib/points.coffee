@@ -17,9 +17,9 @@ module.exports = (numberOfVertices, center) ->
   vertices = [center]
 
   distanceFromCenter = 50
-  angles.forEach (angle) ->
-    x = cos(angle) * distanceFromCenter + center.x
-    y = sin(angle) * distanceFromCenter + center.y
+  angles.reverse().forEach (angle) ->
+    x = Math.round(cos(angle) * distanceFromCenter + center.x)
+    y = Math.round(sin(angle) * distanceFromCenter + center.y)
 
     vertex = {x, y}
 
