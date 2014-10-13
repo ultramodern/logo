@@ -16,8 +16,7 @@ module.exports =
 
     outerRadius = 12
     vertices.forEach (vertex) ->
-      x = vertex.x
-      y = vertex.y
+      {x, y} = vertex
 
       unless circlesDrawn["#{x},#{y}"]
         circlesDrawn["#{x},#{y}"] = true
@@ -50,13 +49,15 @@ module.exports =
             c.animate { transform: "s1, 1, #{x}, #{y}" }, 250, "backOut"
 
     pairs.forEach (pair) ->
-      start = "M#{pair[0].x} #{pair[0].y}"
-      line = "L#{pair[1].x} #{pair[1].y}"
+      [{x:x1, y:y1}, {x:x2, y:y2}] = pair
+
+      start = "M#{x1} #{y1}"
+      line = "L#{x2} #{y2}"
 
       animations.push ->
         canvas.path(start).attr
           stroke: "#fff"
-          "stroke-width": 3
+          "stroke-width": 4
         .toBack()
         .animate { path: "#{start} #{line}" }, 150, animations.next
 
@@ -67,4 +68,4 @@ module.exports =
         .toBack()
         .animate { path: "#{start} #{line}" }, 150, animations.next
 
-    animations.start()
+    setTimeout(animations.start, Math.random() * 5000)

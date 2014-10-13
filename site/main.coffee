@@ -16,10 +16,8 @@ evenRow = false
     else
       x = (logoWidth * col) - logoWidth / 2
 
-    setTimeout ->
-      Logo.add
-        vertices: 4
-        center:
-          x: x
-          y: logoHeight * row
-    , 10
+    Logo.add
+      vertices: 4
+      center:
+        x: x
+        y: logoHeight * row
