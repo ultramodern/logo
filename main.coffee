@@ -1,6 +1,6 @@
 Logo = require "../lib/logo.coffee"
 
-logoWidth = 86.5
+logoWidth = 86
 logoHeight = 75
 
 columns = window.outerWidth / logoWidth + 1
@@ -16,8 +16,10 @@ evenRow = false
     else
       x = (logoWidth * col) - logoWidth / 2
 
-    Logo.add
-      vertices: 4
-      center:
-        x: x
-        y: logoHeight * row
+    setTimeout ->
+      Logo.add
+        vertices: 4
+        center:
+          x: x
+          y: logoHeight * row
+    , 10
