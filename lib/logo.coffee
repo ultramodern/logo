@@ -9,7 +9,8 @@ circlesDrawn = {}
 
 module.exports =
   add: (opts={}) ->
-    animations = Queue()
+    nodeAnimations = Queue()
+    pathAnimations = Queue()
 
     points = opts.vertices - 1
     {pairs, vertices} = Points(points, opts.center)
@@ -21,19 +22,19 @@ module.exports =
       unless circlesDrawn["#{x},#{y}"]
         circlesDrawn["#{x},#{y}"] = true
 
-        animations.push ->
+        nodeAnimations.push ->
           # outer vertex
           canvas.circle(x, y, 0).attr
             stroke: "#000"
             "stroke-width": 3
             fill: "#fff"
-          .animate { r: outerRadius }, 250, "backOut", animations.next
+          .animate { r: outerRadius }, 250, "backOut", nodeAnimations.next
 
-        animations.push ->
+        nodeAnimations.push ->
           # inner vertex
           c = canvas.circle(x, y, 0).attr
             fill: "#000"
-          .animate { r: outerRadius / 2 }, 250, "backOut", animations.next
+          .animate { r: outerRadius / 2 }, 250, "backOut", nodeAnimations.next
 
           c.mouseover ->
             hues = (angle for angle in [0..360] by 15)
@@ -42,7 +43,7 @@ module.exports =
             c.animate {
               fill: color
               stroke: color
-              transform: "s1.25, 1.25, #{x}, #{y}"
+              transform: "s1.5, 1.5, #{x}, #{y}"
             }, 250, "backOut"
 
           c.mouseout ->
@@ -54,18 +55,20 @@ module.exports =
       start = "M#{x1} #{y1}"
       line = "L#{x2} #{y2}"
 
-      animations.push ->
+      pathAnimations.push ->
         canvas.path(start).attr
           stroke: "#fff"
           "stroke-width": 4
         .toBack()
-        .animate { path: "#{start} #{line}" }, 150, animations.next
+        .animate { path: "#{start} #{line}" }, 150, pathAnimations.next
 
-      animations.push ->
+      pathAnimations.push ->
         canvas.path(start).attr
           stroke: "#000"
           "stroke-width": 10
         .toBack()
-        .animate { path: "#{start} #{line}" }, 150, animations.next
+        .animate { path: "#{start} #{line}" }, 150, pathAnimations.next
 
-    setTimeout(animations.start, Math.random() * 5000)
+    setTimeout(nodeAnimations.start, Math.random() * 5000)
+    # HACK to get lines drawing after nodes
+    setTimeout(pathAnimations.start, 5000)
